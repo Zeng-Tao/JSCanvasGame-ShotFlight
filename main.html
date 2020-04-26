@@ -12,78 +12,30 @@
 </style>
 
 <body>
-    <div class="debug-input">
-        <input type="range" value="20" name="fps" id="id-fps" max="60" min="1">
-        fps:<span class=""></span>
-    </div>
-
-    <div id="ctrol">
-        <button id="stop-or-not">暂停/继续</button>
+    <div id="div-debug-input">
+        <div id="ctrol">
+            <button id="stop-or-not">暂停/继续</button>
+        </div>    
     </div>
 
     <script src="game/utlis.js"></script>
+    <script src="game/debug_config.js"></script>
     <script src="game/taogame.js"></script>
     <script src="game/sprite.js"></script>
     <script src="game/paddle.js"></script>
     <script src="game/ball.js"></script>
     <script src="game/block.js"></script>
     <script src="game/map.js"></script>
+
+    <script src="game/player.js"></script>
+    <script src="game/bullet.js"></script>
+
     <script src="game/scenes/scene.js"></script>
     <script src="game/scenes/home.js"></script>
     <script src="game/scenes/play.js"></script>
     <script src="game/scenes/edit.js"></script>
 
-    <script>
-        let divs = document.querySelectorAll('.debug-input')
-        for (let div of divs) {
-            let input = div.querySelector('input')
-            let span = div.querySelector('span')
-            let value = input.value
-            span.innerText = value
-
-            div.addEventListener('input', () => {
-                let value = input.value
-                span.innerText = value
-            })
-        }
-
-        let b = e('#stop-or-not')
-        if (window.pause) {
-            b.innerText = '继续'
-        } else {
-            b.innerText = '暂停'
-        }
-        b.addEventListener('click', function () {
-            window.pause = !window.pause
-            if (window.pause) {
-                b.innerText = '继续'
-            } else {
-                b.innerText = '暂停'
-            }
-        })
-    </script>
-
-    <script>
-        let images = {
-            cloud: 'images/cloud.png',
-            sky: 'images/sky.png',
-            player: 'images/player.png',
-            enemy0: 'images/enemy0.png',
-            enemy1: 'images/enemy1.png',
-            enemy2: 'images/enemy2.png',
-            enemy3: 'images/enemy3.png',
-            enemy4: 'images/enemy4.png',
-            player_bullet: 'images/player_bullet.png',
-            enemy_bullet: 'images/enemy_bullet.png',
-            particle0: 'images/particle0.png',
-        }
-        game = new TaoGame(400, 300, images, maps)
-        game.debugMode = true
-        // s = new Play('play', game)
-        s = new Home('home', game)
-        // s = new Edit('edit', game)
-        game.runWithScene(s)
-    </script>
+    <script src="main.js"></script>
 </body>
 
 </html>

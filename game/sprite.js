@@ -13,10 +13,10 @@ class Sprite {
     }
 
     init(status) {
-        this.x = status['x']
-        this.y = status['y']
+        this.x = status['x'] || 0
+        this.y = status['y'] || 0
         this.name = status['name']
-        this.hp = status['hp']
+        this.hp = status['hp'] || 1
         this.image = this.game.getImage(this.name)
 
         var self = this

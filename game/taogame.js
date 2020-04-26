@@ -80,12 +80,6 @@ class TaoGame {
 
     registerDebugEvent() {}
 
-    debug() {
-        // 动态调整 fps
-        let fps = document.querySelector('#id-fps').value
-        window.fps = fps
-    }
-
     isCollided(spriteA, spriteB) {
         // 那就是判断两个矩形的中心坐标的水平和垂直距离
         let a = spriteA
@@ -174,7 +168,8 @@ class TaoGame {
         }
         // debug
         if (this.debugMode) {
-            this.debug()
+            // 动态调整 fps
+            window.fps = debug_config['fps']['value']
         }
         // scene
         this.scene.update()

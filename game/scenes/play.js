@@ -7,31 +7,32 @@ class Play extends Scene {
 
     setup(level = this.game.currntLevel) {
         // setup 在 TaoGame 绑定 scene 时执行
-        this.paddle = this.addPaddle()
-        this.ball = this.addBall()
-        let map = this.game.loadMap(level)
-        if (!map) {
-            this.backToHome()
-        }
-        this.addBlocks(map)
+        this.player = this.addPlayer()
+        // this.ball = this.addBall()
+        // let map = this.game.loadMap(level)
+        // if (!map) {
+        //     this.backToHome()
+        // }
+        // this.addBlocks(map)
 
-        this.game.whenCollided(this.paddle, this.ball, () => {
-            this.ball.reverseY()
-        })
+        // this.game.whenCollided(this.paddle, this.ball, () => {
+        //     this.ball.reverseY()
+        // })
         // 注册场景按键事件
-        this.registerEvents()
+        // this.registerEvents()
     }
 
-    addPaddle() {
+    addPlayer() {
         let status = {
-            x: 100,
-            y: 280,
-            name: 'paddle',
-            hp: 1,
+            name: 'player',
         }
-        let paddle = new Paddle(status, this.game)
-        this.game.addSprites(paddle)
-        return paddle
+        let player = new Player(status, this.game)
+        let x = (this.game.canvas.width + player.width) / 2
+        let y = this.game.canvas.height - player.height - 50
+        player.x = x
+        player.y = y
+        this.game.addSprites(player)
+        return player
     }
 
     addBall() {
@@ -85,16 +86,16 @@ class Play extends Scene {
 
     update() {
         super.update()
-        if (this.sprites.length === 2) {
-            this.nextLevel()
-        }
-        if (this.ball.y + this.ball.height >= this.game.height) {
-            this.ball.die = true
-            let text = 'GAME OVER!'
-            this.game.drawText(text, 80, 200, 36)
-            text = '按 ESC 键返回开始界面.'
-            this.game.drawText(text, 80, 236, 24)
-        }
+        // if (this.sprites.length === 2) {
+        //     this.nextLevel()
+        // }
+        // if (this.ball.y + this.ball.height >= this.game.height) {
+        //     this.ball.die = true
+        //     let text = 'GAME OVER!'
+        //     this.game.drawText(text, 80, 200, 36)
+        //     text = '按 ESC 键返回开始界面.'
+        //     this.game.drawText(text, 80, 236, 24)
+        // }
     }
 
     nextLevel(level = this.game.currntLevel) {
