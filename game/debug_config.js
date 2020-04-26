@@ -34,9 +34,9 @@ debug_config = {
     enemy_cooldown: {
         description: '敌人弹冷却时间',
         id: 'id-enemy-bullet-cooldown-time',
-        value: 60,
-        max: 100,
-        min: 30,
+        value: 100,
+        max: 150,
+        min: 80,
     },
 
     cloud_speed: {
@@ -46,5 +46,13 @@ debug_config = {
         max: 10,
         min: 1,
     },
+
+    // particle_speed: {
+    //     description: '爆炸粒子移动速度',
+    //     id: 'id-particle-speed',
+    //     value: 3,
+    //     max: 10,
+    //     min: 1,
+    // },
 
 }

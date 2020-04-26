@@ -37,7 +37,7 @@ class Player extends Sprite {
             this.game.scene.enemies.forEach((enemy, index) => {
                 this.game.whenCollided(b, enemy, () => {
                     b.die = true
-                    enemy.die = true
+                    enemy.exploded()
                     this.game.scene.addScore()
                 })
             })

@@ -79,6 +79,7 @@ let loadimages = function () {
         player_bullet: 'images/player_bullet.png',
         enemy_bullet: 'images/enemy_bullet.png',
         particle0: 'images/particle0.png',
+        particle2: 'images/particle2.png',
     }
     return images
 }
@@ -87,7 +88,7 @@ let loadimages = function () {
 let initGame = function () {
     let images = loadimages()
     game = new TaoGame(400, 500, images)
-    game.debugMode = true
+    // game.debugMode = true
     s = new Play('play', game)
     // s = new Home('home', game)
     // s = new Edit('edit', game)

@@ -11,3 +11,8 @@ const es = function (sel) {
 const randomIntBetween = function (a, b) {
     return Math.floor(Math.random() * b) + a
 }
+
+const randomNegativeOrPositive = function () {
+    let detal = parseInt(Math.random() * 10) - 5
+    return detal > 0 ? 1 : -1
+}

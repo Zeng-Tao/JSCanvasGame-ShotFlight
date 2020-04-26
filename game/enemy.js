@@ -3,8 +3,14 @@ class Enemy extends Sprite {
     constructor(status, game) {
         super(status, game)
         this.speed = 5
-        this.cooldown = randomIntBetween(40, 60)
+        this.cooldown = randomIntBetween(80, 120)
         this.setup()
+    }
+
+    exploded() {
+        // 生成爆炸粒子系统
+        let ps = new ParticleSystem(this.x, this.y, this.game)
+        this.die = true
     }
 
     fire() {
