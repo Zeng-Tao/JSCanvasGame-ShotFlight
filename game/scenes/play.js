@@ -5,8 +5,10 @@ class Play extends Scene {
         this.score = 0
     }
 
-    setup(level = this.game.currntLevel) {
+    setup() {
         // setup 在 TaoGame 绑定 scene 时执行
+        this.sky = this.addSky()
+        this.cloudes = this.addClouds()
         this.player = this.addPlayer()
         // this.ball = this.addBall()
         // let map = this.game.loadMap(level)
@@ -22,6 +24,15 @@ class Play extends Scene {
         // this.registerEvents()
     }
 
+    addSky() {
+        let status = {
+            name: 'sky',
+        }
+        let sky = new Sky(status, this.game)
+        this.game.addSprites(sky)
+        return sky
+    }
+
     addPlayer() {
         let status = {
             name: 'player',
@@ -35,46 +46,22 @@ class Play extends Scene {
         return player
     }
 
-    addBall() {
+    addClouds(count = 2) {
+        let clouds = []
         let status = {
-            x: 150,
-            y: 240,
-            name: 'ball',
-            hp: 1,
+            name: 'cloud',
         }
-        let ball = new Ball(status, this.game)
-        this.game.addSprites(ball)
-        return ball
-    }
-
-    addBlocks(map) {
-        let blocks = []
-        for (let status of map) {
-            let block = new Block(status, this.game)
-            blocks.push(block)
-            this.game.whenCollided(block, this.ball, () => {
-                this.ball.reverse()
-                block.hitted()
-                this.score += 1
-                log('hitted')
-            })
+        for (let i = 0; i < count; i++) {
+            let cloud = new Cloud(status, this.game)
+            this.game.addSprites(cloud)
+            clouds.push(cloud)    
         }
-        this.game.addSprites(blocks)
-        return blocks
+        return clouds
     }
 
     registerEvents() {
         this.game.registerEvent('Escape', () => {
             this.backToHome()
-        })
-
-        window.addEventListener('keydown', (event) => {
-            let k = event.key
-            // 载入关卡
-            if ('123456789'.includes(k)) {
-                log('load level k, ', k)
-                this.nextLevel(Number(k))
-            }
         })
     }
 
@@ -86,24 +73,6 @@ class Play extends Scene {
 
     update() {
         super.update()
-        // if (this.sprites.length === 2) {
-        //     this.nextLevel()
-        // }
-        // if (this.ball.y + this.ball.height >= this.game.height) {
-        //     this.ball.die = true
-        //     let text = 'GAME OVER!'
-        //     this.game.drawText(text, 80, 200, 36)
-        //     text = '按 ESC 键返回开始界面.'
-        //     this.game.drawText(text, 80, 236, 24)
-        // }
-    }
-
-    nextLevel(level = this.game.currntLevel) {
-        this.actions = {}
-        this.keys = {}
-        this.sprites = []
-        this.collidPairs = []
-        this.setup(level)
     }
 
     backToHome() {

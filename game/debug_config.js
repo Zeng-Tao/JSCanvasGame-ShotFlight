@@ -23,4 +23,12 @@ debug_config = {
         min: 1,
     },
 
+    cloud_speed: {
+        description: '云移动速度',
+        id: 'id-cloud-speed',
+        value: 5,
+        max: 10,
+        min: 1,
+    },
+
 }
