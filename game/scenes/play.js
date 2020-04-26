@@ -15,6 +15,10 @@ class Play extends Scene {
         // this.registerEvents()
     }
 
+    addScore() {
+        this.score += 10
+    }
+
     addSky() {
         let status = {
             name: 'sky',
