@@ -86,7 +86,7 @@ let loadimages = function () {
 
 let initGame = function () {
     let images = loadimages()
-    game = new TaoGame(400, 500, images, maps)
+    game = new TaoGame(400, 500, images)
     game.debugMode = true
     s = new Play('play', game)
     // s = new Home('home', game)

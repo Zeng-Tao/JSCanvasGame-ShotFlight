@@ -24,18 +24,7 @@ class Home extends Scene {
         this.game.runWithScene(s)
     }
 
-    newMap() {
-        let s = new Edit('edit', this.game)
-        this.game.runWithScene(s)
-    }
-
     registerEvents() {
-        this.game.registerEvent('k', () => {
-            this.newGame()
-        })
-        this.game.registerEvent('e', () => {
-            this.newMap()
-        })
     }
 
     showInfo() {

@@ -43,13 +43,6 @@ class TaoGame {
         this.context = this.canvas.getContext('2d')
 
         this.fontsize = 24
-        // 关卡
-        this.maps = JSON.parse(localStorage.getItem('maps'))
-        if (this.maps === null) {
-            // 来自 map.js 的内置关卡
-            this.maps = maps
-            localStorage.setItem('maps', JSON.stringify(this.maps))
-        }
 
         if (this.debugMode) {
             // this.registerDebugEvent()
@@ -197,17 +190,5 @@ class TaoGame {
         setTimeout(function () {
             g.runloop()
         }, 1000 / window.fps)
-    }
-
-    loadMap(level = this.currntLevel) {
-        level -= 1
-        if (level < this.maps.length) {
-            let map = this.maps[level]
-            this.currntLevel += 1
-            return map
-        } else {
-            this.currntLevel = 1
-            return false
-        }
     }
 }
