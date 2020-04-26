@@ -15,6 +15,7 @@ class Enemy extends Sprite {
                 name: 'enemy_bullet',
             }
             let b = new Bullet(stauts, this.game)
+            this.bullets.push(b)
             let x = this.x + this.width / 2 - b.width / 2
             b.x = x
             this.game.addSprites(b)
@@ -34,14 +35,26 @@ class Enemy extends Sprite {
     }
 
     setup() {
+        this.bullets = []
         this.x = randomIntBetween(1, this.game.width - this.width - 100)
         this.y = randomIntBetween(-10, -50)
         this.speed = randomIntBetween(1, 5)
         this.cooldown = randomIntBetween(3, 8)
     }
 
+    updateBullets() {
+        let bullets = this.bullets
+        bullets.forEach((b, index)=> {
+            if (b.die) {
+                bullets.splice(index, 1)
+            }
+        })
+        this.bullets = bullets
+    }
+
     update() {
         super.update()
+        this.updateBullets()
         this.move()
         this.fire()
         this.cooldown -= 1

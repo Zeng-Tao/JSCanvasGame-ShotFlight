@@ -26,15 +26,18 @@ class Scene {
             return
         }
         // 监测碰撞事件
-        for (let pair of this.collidPairs) {
+        let collidPairs = this.collidPairs
+        collidPairs.forEach((pair, index) => {
             let a = pair[0]
             let b = pair[1]
             let callback = pair[2]
-            if (this.game.isCollided(a, b)) {
+            if (a.die || b.die) {
+                collidPairs.splice(index, 1)
+            } else if (this.game.isCollided(a, b)) {
                 callback()
             }
-        }
-        // 
+        })
+        this.collidPairs = collidPairs
         // 响应按键事件
         for (let k in this.keys) {
             if (this.keys[k] === true) {

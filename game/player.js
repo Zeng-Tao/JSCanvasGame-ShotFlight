@@ -25,6 +25,7 @@ class Player extends Sprite {
                 name: 'player_bullet',
             }
             let b = new Bullet(stauts, this.game)
+            this.bullets.push(b)
             let x = this.x + b.width / 2
             b.x = x
             this.game.addSprites(b)
@@ -33,6 +34,12 @@ class Player extends Sprite {
             } else {
                 this.cooldown = 5
             }
+            this.game.scene.enemies.forEach((enemy, index) => {
+                this.game.whenCollided(b, enemy, () => {
+                    b.die = true
+                    enemy.die = true
+                })
+            })
         }
     }
 
@@ -63,6 +70,7 @@ class Player extends Sprite {
     }
 
     setup() {
+        this.bullets = []
 
         this.game.registerEvent('a', () => {
             this.moveLeft()
@@ -85,8 +93,19 @@ class Player extends Sprite {
         })
     }
 
+    updateBullets() {
+        let bullets = this.bullets
+        bullets.forEach((b, index)=> {
+            if (b.die) {
+                bullets.splice(index, 1)
+            }
+        })
+        this.bullets = bullets
+    }
+
     update() {
         super.update()
+        this.updateBullets()
         this.cooldown -= 1
     }
 
