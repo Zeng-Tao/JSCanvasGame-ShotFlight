@@ -20,7 +20,6 @@ class Player extends Sprite {
     fire() {
         // 生产子弹
         if (this.cooldown < 0) {
-            log('player fire')
             let stauts = {
                 y: (this.y - 20),
                 name: 'player_bullet',

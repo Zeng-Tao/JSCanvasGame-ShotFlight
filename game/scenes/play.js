@@ -10,16 +10,7 @@ class Play extends Scene {
         this.sky = this.addSky()
         this.cloudes = this.addClouds()
         this.player = this.addPlayer()
-        // this.ball = this.addBall()
-        // let map = this.game.loadMap(level)
-        // if (!map) {
-        //     this.backToHome()
-        // }
-        // this.addBlocks(map)
-
-        // this.game.whenCollided(this.paddle, this.ball, () => {
-        //     this.ball.reverseY()
-        // })
+        this.enemies = this.addEnemies()
         // 注册场景按键事件
         // this.registerEvents()
     }
@@ -59,6 +50,22 @@ class Play extends Scene {
         return clouds
     }
 
+    addEnemies(number = 5) {
+        let enemies = this.enemies || []
+        // log('enemies, ', enemies)
+        number = number - enemies.length
+        for (let i = 0; i < number; i++) {
+            let no = randomIntBetween(0, 4)
+            let status = {
+                name: `enemy${no}`,
+            }    
+            let e = new Enemy(status, this.game)
+            this.game.addSprites(e)
+            enemies.push(e)    
+        }
+        return enemies
+    }
+
     registerEvents() {
         this.game.registerEvent('Escape', () => {
             this.backToHome()
@@ -73,6 +80,14 @@ class Play extends Scene {
 
     update() {
         super.update()
+        let enemies = this.enemies
+        enemies.forEach((e, index)=> {
+            if (e.die) {
+                enemies.splice(index, 1)
+            }
+        })
+        this.enemies = enemies
+        this.addEnemies()
     }
 
     backToHome() {

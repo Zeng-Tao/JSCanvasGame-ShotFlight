@@ -6,17 +6,32 @@ class Bullet extends Sprite {
     }
 
     setup() {
-        this.speed = 5
+        if (this.name === 'player_bullet') {
+            this.speed = 5
+        } else if (this.name === 'enemy_bullet') {
+            this.speed = -5
+        }
     }
 
     move() {
         this.y -= this.speed
+        if (this.name === 'player_bullet') {
+            if (this.y < -100) {
+                this.die = true
+            }
+        } else if (this.name === 'enemy_bullet') {
+            if (this.y > this.game.height) {
+                this.die = true
+            }    
+        }
     }
 
     debug() {
         if (this.game.debugMode) {
             if (this.name === 'player_bullet') {
                 this.speed = debug_config['player_bullet_speed']['value']
+            } else if (this.name === 'enemy_bullet') {
+                this.speed = debug_config['enemy_bullet_speed']['value']
             }
         }
     }
@@ -25,9 +40,6 @@ class Bullet extends Sprite {
         super.update()
         this.debug()
         this.move()
-        if (this.y < -100) {
-            this.die = true
-        }
     }
 
 }
